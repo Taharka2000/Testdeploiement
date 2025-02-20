@@ -25,7 +25,7 @@ app.get('/api/health', (req, res) => {
 });
 
 // Routes
-app.use("/api/contacts", contactRoutes);
+app.use("/api/contacts" , contactRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
