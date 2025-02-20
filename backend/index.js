@@ -8,7 +8,11 @@ const morgan = require("morgan");
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: 'https://testdeploiement-ruby.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("combined"));
