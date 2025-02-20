@@ -6,24 +6,21 @@ const contactRoutes = require("./routes/ContactRoutes");
 const morgan = require("morgan");
 
 const app = express();
-app.use(cors({
-    origin: ['https://mini-cud-two-17vu.vercel.app', 'http://localhost:5173'], // Ajoute localhost pour tests locaux
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
-}));
 
+// Middleware
+app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({extended: true}))
-app.use(morgan("combined"))
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("combined"));
 
 // Routes
 app.use("/api/contacts", contactRoutes);
 
+// Connexion à MongoDB
 mongoose
-    .connect(process.env.MONGO_URI)
-    .then(() => console.log("MongoDB Connected"))
-    .catch((err) => console.log(err));
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ MongoDB Connecté"))
+  .catch((err) => console.error("❌ Erreur MongoDB :", err));
 
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => console.log(`Serveur en marche sur le port ${PORT}`));
+app.listen(PORT, () => console.log(`✅ Serveur en marche sur le port ${PORT}`));
